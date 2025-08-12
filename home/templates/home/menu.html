@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<hmtl>
+<head>
+    <title>menu</title>
+</head>
+<body style="font-family: Arial; margin:20px;">
+    <h1>Our Menu</h1>
+    <ul>
+        {% for item in menu_items %}
+            <li>{{item.name}} - Rs{{item.price}}
