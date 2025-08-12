@@ -8,7 +8,7 @@ def home(request):
 
 def menu_list(request):
     menu_items = [
-    {"name": "margherita jambo pizza", "prize":500},
+    {"name": "margherita jambo pizza", "price":500},
     {"name": "penne pasta", "price:400"},
     {"name": "veg burger", "price:200"},
     {"name": "chocolate brownie" ,"price:340"}
