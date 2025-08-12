@@ -19,3 +19,9 @@ def menu_list(request):
 def home(request):
     phone_number = settings.RESTAURANT_PHONE
     return render(request, 'home.html' , {'phone_number':phone_number})
+
+def home(request):
+    return render(request, 'home.html',
+    {
+        'restaurant_name':'KIKIS KITCHEN'
+    })
