@@ -15,3 +15,6 @@ def menu_list(request):
     ]
     return render(request,"menu.html",{"menu_items":menu_items})
     
+
+def home(request):
+    phone_number = settings.RESTAURENT_PHONE
