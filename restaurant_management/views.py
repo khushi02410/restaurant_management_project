@@ -3,7 +3,7 @@ from django.config import settings
 
 def home(request):
     return render (request , 'home.html',{
-        'restaurent_name':settings.RESTAURENT_NAME
+        'restaurent_name':settings.RESTAURANT_NAME
     })
 
 def menu_list(request):
@@ -18,3 +18,4 @@ def menu_list(request):
 
 def home(request):
     phone_number = settings.RESTAURANT_PHONE
+    return render(request, 'home.html' , {'phone_number':phone_number})
