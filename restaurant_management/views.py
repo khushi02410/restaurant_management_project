@@ -17,4 +17,4 @@ def menu_list(request):
     
 
 def home(request):
-    phone_number = settings.RESTAURENT_PHONE
+    phone_number = settings.RESTAURANT_PHONE
