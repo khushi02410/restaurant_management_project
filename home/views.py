@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from datetime import datetime
+from .models import MenuItem
 # Create your views here.
 
 
@@ -12,7 +13,7 @@ def home(request):
     return render(request 'home.html',
     {
         'restaurant_name':'KIKIS KITECHEN'
-    })  
+    }
 
 def home(request):
     return render(request, 'home/home.html',{'current_year': datetime.now().year})
@@ -29,3 +30,12 @@ def menu(request):
 def reservations(request):
     return render(request,'home/reservations.html':{'current_year': datetime.now().year})
 
+def menu_view(request):
+    try:
+        items = MenuItem.objects.all()
+        return render(request, 'menu.html',{'items':items})
+    except Exception as e:
+        #log the error for debugging
+        print(f"Error fetching menu items: {e}")
+
+        return HttpResponse("Sorry, we could't load the menu right now.")
