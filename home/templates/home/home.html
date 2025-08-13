@@ -1,6 +1,9 @@
 <html>
 <head>
     <title>{{KIKIS KITCHEN}} - Home</title>
+    {% extends 'base.html'%}
+
+    {% extends title %}Home{% endblock %}
     <style>
         body{
             font-family:Arial, sans-sarif;
@@ -22,19 +25,17 @@
             padding:40px;
         }
         p {
-            font-size:1.2rem;
-            margin-top : 20px;
-
+            color: #555;
+            font-size:16px;
+            margin-bottom : 20px;
         }
         .btn
         {
-            display:inline-block;
             background-color:#e67e22;
             color:white;
-            padding:12px 26px;
+            padding:10px 20px;
+            text-decoration:none;
             border-radius:6px;
-            border-radius:6px;
-            margin-top:20px;
         }
         .btn-hover{
             background-color: #d16c2a;
@@ -52,5 +53,7 @@
         <a href="/contact" class="btn">Contact Us</a>
         <p>contact us at: <strong> {{phone_number}} </strong></p>
     </main>
+
+    {% endblock %}
 </body>            
 </html>
