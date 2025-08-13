@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{%block title %}Restaurent{% endblock %}</title>
+        <style>
+            footer{
+                text-align:center;
+                padding:10px;
+                background-color:#f4f4f4;
+                margin-top:20px;
+                color:#555;
+
+            }
+        </style>
+    </head>
+    <body>
+        {%block content%}{%end block%}
+
+        <footer>
+            &copy; {{current_year}} Restaurent. All rights reserved
+        </footer>
+    </body>
+</html>        
