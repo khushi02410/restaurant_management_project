@@ -41,14 +41,16 @@
     </body>
 </html>                        -->
 
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Contact Us</title>
     <script>
         function validation()
         {
-            let name = document.forms["contactForm"]["name"].values;
-            let email = document.forms["contactForm"]["email"].values;
+            let name = document.forms["contactForm"]["name"].value;
+            let email = document.forms["contactForm"]["email"].value;
 
             if (name == "" || email === "")
                 alert("Name and email must be filled out");
