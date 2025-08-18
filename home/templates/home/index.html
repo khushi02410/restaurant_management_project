@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Restaurant Menu</title>
+    <style>
+        body
+                {
+                font-family:Arial , sans-serif;
+                margin : 20px;
+                background: #cc8787;
+            }
+            h1 {
+                color : #333;
+            }
+            .menu {
+                display : grid;
+                grid-template-columns : repeat(auto-fill , minmax(230px , 1fr));
+                gap : 20;
+            }
+            .menu-item {
+                background : white ;
+                padding : 15px ;
+                border-radius : 10px ;
+                box-shadow : 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .price {
+                color : green ;
+                font-weight : bold;
+            }
+    </style>
+</head>
+<body>
+    <h1>Restaurant Menu</h1>
+    <div class= "menu">
+        {% for item in menu items %}
+        <div class = "menu-item">
+            <h2>{{item.name}}</h2>
+            <p>{{item.description}}</p>
+            <P class = "price">Rs {{item.price}}</P>
+        </div>
+        <% empty %>
+            <p> No items available in the menu </p>
+        <% endfor %>
+    </div>
+</body>
+</html>                  
