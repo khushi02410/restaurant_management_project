@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
     <head>
         <title>Contact Us</title>
@@ -39,4 +39,35 @@
             <p><strong>Email:</strong>contact@ourrestaurent.com</p>
         </div>
     </body>
-</html>                       
+</html>                        -->
+
+<html>
+<head>
+    <title>Contact Us</title>
+    <script>
+        function validation()
+        {
+            let name = document.forms["contactForm"]["name"].values;
+            let email = document.forms["contactForm"]["email"].values;
+
+            if (name == "" || email === "")
+                alert("Name and email must be filled out");
+                return false;
+            }
+            return true;    
+        }
+    </script>
+</head>
+<body>
+    <h2>Contact Us</h2>
+    <form name = "contactForm" onsubmit="return validationForm()">
+        <label for="name">Name:</label>
+        <input type = "text" name="name"><br><br>
+
+        <label for="email">Email:</label>
+        <input type = "email" name = "email"><br><br>
+
+        <input type = "submit" value="Submit">
+    </form>
+</body>
+</html>            
