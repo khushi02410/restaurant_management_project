@@ -39,3 +39,6 @@ def menu_view(request):
         print(f"Error fetching menu items: {e}")
 
         return HttpResponse("Sorry, we could't load the menu right now.")
+
+def contact_view(request):
+    return render(request, 'home/contact.html')
