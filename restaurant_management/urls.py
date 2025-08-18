@@ -26,5 +26,6 @@ urlpatterns = [
     path('api/orders/',include('orders.urls')),
     path('', include('home.urls')),
     Path('',views.home,name='home'),
+    path('', include('home.urls')),
     
 ]
