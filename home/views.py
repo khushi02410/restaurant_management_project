@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 from .models import MenuItem
+from products.models import MenuItem
 # Create your views here.
 
 
@@ -42,3 +43,7 @@ def menu_view(request):
 
 def contact_view(request):
     return render(request, 'home/contact.html')
+
+def home(request):
+    menu_itemss = Menu.objects.all()
+    return render(request, 'home/index.html', {'menu_items' : menu_items})
