@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .models import MenuItem 
+from restaurant.models import MenuItem 
 # Create your models here.
 
 class Order(models.Model)
@@ -11,11 +11,11 @@ class Order(models.Model)
         ('cancelled' , 'Cancelled'),
     ]
 
-    customer = models.ForeginKey(User , on_delete = models.CASADE)
-    customer = models.ManyToManyFeild(MenuItem)
-    total_amount = models.DecimalFeild(max_digit = 10 , decimal_places = 2)
+    customer = models.ForeginKey(User , on_delete=models.CASCADE)
+    order_items = models.ManyToManyField(MenuItem)
+    total_amount = models.DecimalField(max_digits = 10 , decimal_places = 2)
     status = models.CharField(max_length = 20 , choices = STATUS_CHOICES , default = 'pending')
-    created_at = models.DateTimeFeild(auto_now_add = True)
+    created_at = models.DateTimeField(auto_now_add = True)
 
     def __str__ (self):
-        reutrn f"Order {self.id} by {self.customer.username}"
+        return f"Order {self.id} by {self.customer.username}"
