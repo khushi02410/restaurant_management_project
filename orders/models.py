@@ -14,9 +14,8 @@ class Order(models.Model)
     customer = models.ForeginKey(User , on_delete = models.CASADE)
     customer = models.ManyToManyFeild(MenuItem)
     total_amount = models.DecimalFeild(max_digit = 10 , decimal_places = 2)
-    status = models.CharFieldm(max_length = 20 , choices = STATUS_CHOICES , default = 'pending')
+    status = models.CharField(max_length = 20 , choices = STATUS_CHOICES , default = 'pending')
     created_at = models.DateTimeFeild(auto_now_add = True)
-    updated_at = models.DateTimeFeild(auto_new = True)
 
     def __str__ (self):
-        reutrn f"Order {self.id} by {self.customer.username} - {self.status}"
+        reutrn f"Order {self.id} by {self.customer.username}"
