@@ -27,5 +27,8 @@ urlpatterns = [
     path('', include('home.urls')),
     Path('',views.home,name='home'),
     path('', include('home.urls')),
-    
+    path("admin/", admin.site.urls),
+    path("",include("home.urls")),
+    path("admin/", admin.site.urls),
+    path("", include("home.urls")),
 ]
