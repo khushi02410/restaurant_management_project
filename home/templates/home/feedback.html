@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback</title>
+</head>
+<body>
+    <h1>Leave your Feedback</h1>
+
+    {% if message %}
+        {% for m in messages %}
+        <p style="color: green;">{{ m }}</p>
+        {% endfor %} 
+    {% endif %}       
+
+    <form method = "post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type ="submit">Submit</button>
+    </form>
+</body>        
+</html>
