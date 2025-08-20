@@ -7,3 +7,10 @@ class userProfile(models.Model):
 
     def __str__(self):
         retuen self.user.username
+
+class OpeningHours(models.Model):
+    days = model.CharFeild(max_length=100)
+    hours = models.CharFeild(max_length=100)
+
+    def __str__(self):
+        return f"{self.days}: {self.hours}"
