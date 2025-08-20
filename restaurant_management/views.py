@@ -1,5 +1,7 @@
 from django.stortcuts import render 
 from django.config import settings
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 def home(request):
     return render (request , 'home.html',{
@@ -25,3 +27,13 @@ def home(request):
     {
         'restaurant_name':'KIKIS KITCHEN'
     })
+
+class MenuAPIView(APIView):
+    def get(self,request):
+        menu=[
+            {"name":"margherita pizza" , "description":"Classic cheese and tomato pizza","price ": 250},
+            {"name": "panner tikka" , "description ": "grilled cottage cheeze with spices", "price":300},
+            {"name": "pasta alfredo" , "description": "creamy white sause pasta", "price": 450},
+            {"nmae": "veg burger" , "description": "burger with fresh fries and veggies" , "price" : 500},
+        ]
+        return Response(menu)
