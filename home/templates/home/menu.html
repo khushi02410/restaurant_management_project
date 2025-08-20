@@ -7,6 +7,14 @@
 <body style="font-family: Arial; margin:20px;">
 
     <h1>Our Menu</h1>
+
+    <form method="GET" action="" style="text-align:center; margin:20px;">
+        <input type = "text" name="q" placeholder="search menu items"
+            style="padding:8px; width:260px; border-radius:5px; border:1px solid #ccc;">
+        <button type="submit" style="padding:8px 15px; border:none; background:#4CAF50; color:white;">    
+            search
+        </button>   
+
     <ul>
         {% for item in menu_items %}
             <li>
