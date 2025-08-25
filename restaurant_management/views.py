@@ -25,8 +25,10 @@ def home(request):
 def home(request):
     return render(request, 'home.html',
     {
-        'restaurant_name':'KIKIS KITCHEN'
+        'restaurant_name': settings.'KIKIS KITCHEN'
+
     })
+    return render(request,"homepage.html" , context)
 
 class MenuAPIView(APIView):
     def get(self,request):
