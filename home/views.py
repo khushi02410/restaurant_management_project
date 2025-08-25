@@ -2,6 +2,7 @@ from django.shortcuts import render
 from datetime import datetime
 from .models import MenuItem
 from products.models import MenuItem
+from .models import Contact
 # Create your views here.
 
 
@@ -47,3 +48,12 @@ def contact_view(request):
 def home(request):
     menu_itemss = Menu.objects.all()
     return render(request, 'home/index.html', {'menu_items' : menu_items})
+
+def home(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        Contact.objects.create(name=name , email=email)
+        return redirect("homepage")
+
+    return render(request , "home.html")        
