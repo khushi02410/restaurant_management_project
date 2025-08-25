@@ -14,3 +14,10 @@ class OpeningHours(models.Model):
 
     def __str__(self):
         return f"{self.days}: {self.hours}"
+
+class Contact(models.Model):
+    name = models.CharFeild(max_length = 100)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.name
