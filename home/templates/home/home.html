@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>{{KIKIS KITCHEN}} - Home</title>
+    <title>Restaurant Homepage</title>
     {% extends 'base.html'%}
 
     {% extends title %}Home{% endblock %}
@@ -52,8 +52,16 @@
     <header>{{KIKIS KITCHEN}}</header>
     <main>
         {%extends "home/base.html"%}
-        <p>Welcome to our Restaurent! we are glad to have you here.</p> 
-        <p>bon appetit enjoy the finest dishes made with love. </p>
+        <h1>Welcome to our Restaurent! we are glad to have you here.</h1>
+        <h2>Contact Us</h2> 
+        <form method="post">
+            {% csrf_token %}
+            <label>Name:</label>
+            <input type="text" name = "name" required><br><br>
+            <label>Email:</label>
+            <input type="email" name = "email" required><br><br>
+            <button type = "submit">Submit</button>
+            
         <a href= "/orders" class="btn">View Menu</a>
         <a href= "{% url 'about' %}">About Us</a>
         <a href="/contact" class="btn">Contact Us</a>
