@@ -34,4 +34,5 @@ urlpatterns = [
     path("", include("home.urls")),
     path("menu/", MenuAPIView.as_view(), name="menu"),
     path("api/",include("restaurant.url")),
+    path('', include('order.urls')),
 ]
