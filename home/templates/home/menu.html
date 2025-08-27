@@ -6,7 +6,7 @@
 {% block content %}
 <body style="font-family: Arial; margin:20px;">
 
-    <h1>Our Menu</h1>
+    <h1 style = "text-align:center; margin:20px;">Our Menu</h1>
 
     <form method="GET" action="" style="text-align:center; margin:20px;">
         <input type = "text" name="q" placeholder="search menu items"
@@ -15,13 +15,17 @@
             search
         </button>   
 
-    <ul>
+    <div style = "display:flex; flex-wrap; justify-content:center ; gap:20px; padding:20px;">
         {% for item in menu_items %}
-            <li>
-                <strong>{{item.name}}</strong> - {{ item.description }} (Rs{{item.price}})
-            </li>
+        <div style = "border:1px solid #ddd; border-radius:10px; padding:15px width:250px">
+                <h3>{{item.name}}</h3>
+                <p>{{item.description}}
+                <p><strong>{{item.name}}</strong></p>
+        </div>
+        {% empty %}
+        <p>no menu items available yet </p>
         {% endfor %}    
-    </ul>
+    </div>
 {% endblock %}    
 </body>
 </html>            
