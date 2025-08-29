@@ -26,6 +26,7 @@ def home(request):
     return render(request, 'home.html',
     {
         'restaurant_name': settings.'KIKIS KITCHEN'
+        "restaurant_address": settings.RESTAURANT_ADDRESS
 
     })
     return render(request,"home.html" , context)
