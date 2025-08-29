@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from restaurant.models import MenuItem 
+
 # Create your models here.
 
 class Menu(models.model):
@@ -33,3 +34,4 @@ class MenuItem(models.Model):
 
     def __str__(self):
         return f"{self.name} = Rs{self.price}"
+
