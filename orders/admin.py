@@ -4,6 +4,7 @@ from .models import MenuItem
 
 # Register your models here.
 admin.site.register(MenuItem)
+admin.site.register(Order)
 
 class MenuAdmin(admin.ModelAdmin):
     list_display = ("name","price","description")
