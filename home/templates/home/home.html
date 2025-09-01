@@ -82,6 +82,21 @@
             height="400"
             style = "border:0;">
         </iframe>
+
+        <h3>Featured Menu</h3>
+        <div class = "menu-container">
+            {% for item in featured_items %}
+            <div class = "menu-item">
+                {% if item.image %}
+                    <img src = "{{ item.image.url }}" alt = "{{ item.name }}">
+                {% endif %}
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.description|truncatechars:50}}</p>
+                <p><strong>${{ item.price }}</strong></p>
+            </div>
+            {% endfor %}
+        </div>            
+    <a href="% url 'menu' %}">view full menu
     </main>
 
 </body>            
