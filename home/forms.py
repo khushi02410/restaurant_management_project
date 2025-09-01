@@ -12,3 +12,8 @@ class FeedbackForm(forms.modelForm):
             })
         }
         labels = {"comments":"your Feedback"}
+
+class ContactForm(forms.modelForm):
+    class meta:
+        model = Contact
+        fields = ["name","email"]
