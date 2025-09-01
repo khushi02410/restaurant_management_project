@@ -3,6 +3,7 @@ from datetime import datetime
 from .models import MenuItem
 from products.models import MenuItem
 from .models import Contact
+form django.contrib import messages
 # Create your views here.
 
 
@@ -43,7 +44,16 @@ def menu_view(request):
         return HttpResponse("Sorry, we could't load the menu right now.")
 
 def contact_view(request):
-    return render(request, 'home/contact.html')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Thank you we have recieved your contact info.")
+            return redirect('contact')
+        else
+            form = ContactForm()
+
+    return render(request, 'home/contact.html', {'form': form})
 
 def home(request):
     menu_itemss = Menu.objects.all()
