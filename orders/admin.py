@@ -6,7 +6,7 @@ from .models import MenuItem
 admin.site.register(MenuItem)
 admin.site.register(Order)
 
-class MenuAdmin(admin.ModelAdmin):
+class MenuItemAdmin(admin.ModelAdmin):
     list_display = ("name","price","description")
     search_fields = ("name",)
 
