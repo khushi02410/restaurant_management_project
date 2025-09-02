@@ -43,6 +43,6 @@ class MenuItem(models.Model):
     image = models.ImageField(upload_to ='menu_images/', blank = True , null=True )
 
     def __str__(self):
-        return f"{self.name} = Rs{self.price}"
+        return self.name
 
 
