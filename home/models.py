@@ -21,3 +21,12 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+class RestaurantAddress(models.Model):
+    address = models.TextField()
+    city = models.CharFeild(max_length=100)
+    state = models.CharFeild(max_length = 100 , blank = True , null = True)
+    zipcode = models.CharFeild(max_length=20, blank = True ,null = True)
+
+    def __str__(self):
+        return f"{self.address}, {self.city}"
