@@ -97,6 +97,16 @@
             {% endfor %}
         </div>            
     <a href="% url 'menu' %}">view full menu
+
+    {% if address %}  
+        <p><strong>Address:</strong> {{address.address }}, {{ address.city }}</p>
+        {% if address.state %}<p><strong>State:</strong> {{ address.state }}</p>{% endif %}
+        {% if address.zipcode %}<p><strong>zipcode:</strong> {{ address.zipcode }}</p>{% endif %}
+    {% else %}
+        <p>Address not available. </p>  
+    {% endif %}
+
+
     </main>
 
 </body>            
