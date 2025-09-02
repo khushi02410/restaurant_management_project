@@ -134,4 +134,4 @@ RESTAURANT_PHONE= "+91-4325674393"
 RESTAURANT_ADDRESS = "Near gls dominos pizza"
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
