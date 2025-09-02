@@ -11,6 +11,8 @@ def home_view(request):
     return render(request, 'home/home.html')
     return render(request, 'about.html')
     return render(request, 'contact.html')
+    address = restaurantAddress.objects.first()
+    return render(request, 'home.html' , {'address': address})
 
 def home(request):
     return render(request 'home.html',
