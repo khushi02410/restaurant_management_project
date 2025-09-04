@@ -8,6 +8,8 @@ def home(request):
         'restaurent_name':settings.RESTAURANT_NAME
     })
 
+
+
 def menu_list(request):
     menu_items = [
     {"name": "margherita jambo pizza", "price":500},
@@ -23,11 +25,13 @@ def home(request):
     return render(request, 'home.html' , {'phone_number':phone_number})
 
 def home(request):
+    address = RestaurantAddress.objects.first()
+
     return render(request, 'home.html',
     {
         'restaurant_name': settings.'KIKIS KITCHEN'
         "restaurant_address": settings.RESTAURANT_ADDRESS
-
+        "address": address
     })
     return render(request,"home.html" , context)
 
