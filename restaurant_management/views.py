@@ -35,6 +35,10 @@ def home(request):
     })
     return render(request,"home.html" , context)
 
+def home(request):
+    restaurant =Restaurant.objects.first()
+    return render(request , "home.html", {"restaurant": restaurant})
+
 class MenuAPIView(APIView):
     def get(self,request):
         menu=[
