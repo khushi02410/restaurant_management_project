@@ -45,6 +45,17 @@
             margin:20px auto;
             width:250px; 
         }
+        .hours h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .hours ul {
+            list-style:none;
+            padding:0;
+        }
+        .hours li {
+            margin:4px 0;
+        }
 
     </style>
 </head>
@@ -74,8 +85,23 @@
         <!-- google Maps embed & address  -->
         <h2>our Location</h2>
         <p>
-            near gls dominos pizza india 
-        </p>    
+            {{ restaurant.street }} <br>
+            {{ restaurant.city }}, {{ restaurant.state }} - {{ restaurant.zip_code }}
+
+        </p>
+        <div class = "hours">
+            <h3>opening hours</h3>
+            {% if restaurant.opening_hours %}
+                <ul>
+                    {% for day, hours in restaurant.opening_hours.items %}
+                    <li><strong>{{ day }}:</strong> {{ hours }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>opening hours not available</p>
+            <% endif %
+        </div>
+
         <iframe
             src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.4693213891587!2d72.55171631538541!3d23.030513621201263!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84fb94c43f7%3A0x8b0e8b54f5eae85!2sGLS%20University!5e0!3m2!1sen!2sin!4v1690209786355!5m2!1sen!2sin"
             width = "500"
