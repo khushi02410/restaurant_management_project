@@ -35,6 +35,7 @@ urlpatterns = [
     path("menu/", MenuAPIView.as_view(), name="menu"),
     path("api/",include("restaurant.url")),
     path('', include('order.urls')),
+    path ('orders/' , include('orders.url')),
 ]
 
 if settings.DEBUG:
