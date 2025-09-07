@@ -49,13 +49,18 @@ def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Thank you we have recieved your contact info.")
-            return redirect('contact')
-        else
-            form = ContactForm()
+            contact = form.save()
+            
+            subject = f"New Contact Form Submission from {contact.name}"
+            message = f"Name: {contact.name}\nEmail: {contact.email}\n\nMessage:\n{contact.message}"
+            recipient_list = ["kikieskitchen@gmail.com"]
 
-    return render(request, 'home/contact.html', {'form': form})
+            send_mail(subject , message , setting.DEFAULT_FROM_EMAIL , recipient_list)
+            
+            return redirect('contact_success')
+        else:
+            form = ContactForm()
+        return render(request, 'home/contact.html', {'form': form})
 
 def home(request):
     menu_itemss = Menu.objects.all()
