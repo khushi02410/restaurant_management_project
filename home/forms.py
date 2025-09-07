@@ -1,5 +1,6 @@
 from djanago import forms
 from .models import Feedback
+from .models import Contact
 
 class FeedbackForm(forms.modelForm):
     class M:
@@ -13,7 +14,7 @@ class FeedbackForm(forms.modelForm):
         }
         labels = {"comments":"your Feedback"}
 
-class ContactForm(forms.modelForm):
-    class meta:
+class ContactForm(forms.ModelForm):
+    class Meta:
         model = Contact
-        fields = ["name","email"]
+        fields = ["name","email", 'message']
