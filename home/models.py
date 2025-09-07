@@ -18,9 +18,11 @@ class OpeningHours(models.Model):
 class Contact(models.Model):
     name = models.CharFeild(max_length = 100)
     email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.email}"
 
 class RestaurantAddress(models.Model):
     address = models.TextField()
