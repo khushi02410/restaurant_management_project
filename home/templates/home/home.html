@@ -110,7 +110,7 @@
             style = "border:0;">
         </iframe>
 
-        <h3>Featured Menu</h3>
+        <h3> Menu</h3>
         <div class = "menu-container">
             {% for item in featured_items %}
             <div class = "menu-item">
@@ -132,9 +132,28 @@
     {% else %}
         <p>Address not available. </p>  
     {% endif %}
-
-
     </main>
+
+    <!-- search bar -->
+    <form method = "GET" action = " " style = "text-align:center; margin:20px;">
+        <input type = "text" name "q" placeholder = "Search menu items">
+            value = "{{ query|default'' }}"
+            style = "padding:8px; width:250px; border-radius:5px; border:1px solid #ccc;">
+        <button type = "sumit" style="padding:8px 15px; border:none; background:#4CAF50; color:white " >
+            Search
+        </button>
+    </form>
+
+    <ul style="list-style:none; padding:0; text-align:center;">
+        {% for item in menu_items %}
+            <li style="margin:15px 0;">
+                <strong>{{ item.name }}</strong> - {{ item.description }} -Rs{{ item.price }}
+            </li>
+        {% empty %}
+            <li>No menu item found. </li>
+        {% endfor %}
+    </ul>                             
+
 
 </body>            
 </html>
