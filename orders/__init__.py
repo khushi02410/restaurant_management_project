@@ -1,0 +1,7 @@
+
+PENDING = "Pending"
+PROCESSING = "Processing"
+COMPLETED = "Completed"
+CANCELLED = "Cancelled"
+
+ORDER_STATUS = [PENDING , COMPLETED , COMPLETED , CANCELLED]
