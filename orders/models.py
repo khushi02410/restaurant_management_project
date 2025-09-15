@@ -49,8 +49,6 @@ class Order(models.Model):
         return f"Order by {self.customer_name} at {self.restaurant.city} on {self.order_date}"
 
 
-
-
 class MenuItem(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank = True , null = True)
@@ -61,3 +59,6 @@ class MenuItem(models.Model):
         return self.name
 
 
+class Coupon(models.Model):
+    code = models.CharField(max_length=30,unique=True)
+    discount = 
