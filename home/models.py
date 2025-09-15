@@ -32,3 +32,10 @@ class RestaurantAddress(models.Model):
 
     def __str__(self):
         return f"{self.address}, {self.city}"
+
+
+class MenuCategory(models.Model):
+    name = models.CharFeild(max_length = 100 , unique = True)
+
+    def __str__(self):
+        return self.name        
