@@ -11,5 +11,6 @@ urlpatterns = [
     path ('contact/success', view.contact_success , name='contact_success'),
     path('', views.home , name = 'home'),
     path("feedback/" , feedback_view , name = "feedback"),
+    path('menu-categories/' , MenuCategoryListView.as_view() , name='menu-categories'),
 
 ]
