@@ -3,7 +3,9 @@ from datetime import datetime
 from .models import MenuItem
 from products.models import MenuItem
 from .models import Contact
-form django.contrib import messages
+from django.contrib import messages
+from .models import MenuCategory 
+from .serializers import MenuCategorySerializer
 # Create your views here.
 
 
@@ -74,3 +76,8 @@ def home(request):
         return redirect("homepage")
 
     return render(request , "home.html")        
+
+
+class MenuCategoryListView(ListAPIView):
+    queryset = MenuCategory.objects.all()
+    serializers_class = MenuCategorySerializer
