@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import MenuItem
+from .models import Order
+from .serializers import OrderSerializer
 
 # Create your views here.
 path('/orders',OrdersListView.as_view(),name='orders'),
@@ -17,3 +19,11 @@ def home_view(request):
 
     # featured_items = MenuItem.objects.all()[:3]
     return render(request, 'home.html' , {'menu_items': menu_items, "query": query})
+
+class OrderHistoryView(generics.ListAPIView)
+    serializer_class = OrderSerializer
+    permission_classes = [permissions_IsAuthentication]
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user).order_by('-date')
+        
