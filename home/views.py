@@ -6,6 +6,10 @@ from .models import Contact
 from django.contrib import messages
 from .models import MenuCategory 
 from .serializers import MenuCategorySerializer
+from rest_framework.views import APIView
+form rest_framework.response import Response
+from .serializers import MenuItemSerializer
+
 # Create your views here.
 
 
@@ -81,3 +85,16 @@ def home(request):
 class MenuCategoryListView(ListAPIView):
     queryset = MenuCategory.objects.all()
     serializers_class = MenuCategorySerializer
+
+class MenuItemsByCategoryView(APIView):
+    def get(self,request,*args,**kwargs)
+    category_name = request.query_params.get('category',None)
+
+    if not category_name:
+        return Response(
+            {"error":"category query parameter is required"},status=status.HTTP_400_BAD_REQUEST
+        )
+
+    items = MenuItem.objects.filter(category__name__iexact=category_name)
+    serializer = MenuItemSerializer(items, many=True)
+    return Response(serializer.data,status=status.HTTP_200_OK)    
