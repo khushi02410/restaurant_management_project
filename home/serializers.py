@@ -11,4 +11,4 @@ class MenuItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=MenuItem
-        feilds = ['id' , 'name']
+        feilds = ['id' , 'name' , 'description','price','category']
