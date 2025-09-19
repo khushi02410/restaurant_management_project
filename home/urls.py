@@ -12,5 +12,6 @@ urlpatterns = [
     path('', views.home , name = 'home'),
     path("feedback/" , feedback_view , name = "feedback"),
     path('menu-categories/' , MenuCategoryListView.as_view() , name='menu-categories'),
+    path('menu-items/',MenuItemsByCategoryView.as_view(),name='menu-items-by-category'),
 
 ]
