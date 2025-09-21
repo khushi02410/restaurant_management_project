@@ -11,4 +11,9 @@ class MenuItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=MenuItem
-        feilds = ['id' , 'name' , 'description','price','category']
+        feilds = ['id' , 'name' , 'description','price','category','available']
+
+    def validation_price(self,value):
+        if value <= 0:
+            raise serializers.validationError("price must be a +tive number") 
+        return value       
