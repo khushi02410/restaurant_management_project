@@ -11,7 +11,7 @@ form rest_framework.response import Response
 from .serializers import MenuItemSerializer
 from django.http import JsonResponse
 from utils.validation_utils import is_valid_email
-
+from rest_framework import status
 # Create your views here.
 
 
@@ -108,3 +108,18 @@ def subscribe_view(request):
         if not is_valid_email:
             return JsonResponse({"error": "Invalid email address"}, status = 400)
         return JsonResponse({"message":"subscription successful!"})
+
+
+class MenuItemViewSet(viewsets.ModelViewSet):
+    queryset = MenuItem.objects.all()
+    serializer_class = MenuItemSerializer
+    permission_classes= [permission.ISAdminUser]
+
+    def update(self,request,*args,**kwargs):
+        try:
+            return super().update(request,*args, **kwargs)
+        except Exception as e:
+            return Response(
+                {"error":str(e)},
+                status=status.HTTPs_404_BAD_REQUEST
+            )    
