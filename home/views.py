@@ -12,6 +12,8 @@ from .serializers import MenuItemSerializer
 from django.http import JsonResponse
 from utils.validation_utils import is_valid_email
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
+from rest_framework import viewsets , filters
 # Create your views here.
 
 
@@ -123,3 +125,16 @@ class MenuItemViewSet(viewsets.ModelViewSet):
                 {"error":str(e)},
                 status=status.HTTPs_404_BAD_REQUEST
             )    
+
+class MenuItemPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+class MenuItemViewSet(viewsets.ReadOnlyModelViewSet):
+    query = MenuItem.objects.all()
+    serializer_class = MenuItemSerializer
+    pagination_class = MenuItemPagination
+
+    filter_backends = [filter.SearchFilter]
+    search_fields = ['name']
