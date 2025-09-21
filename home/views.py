@@ -9,6 +9,8 @@ from .serializers import MenuCategorySerializer
 from rest_framework.views import APIView
 form rest_framework.response import Response
 from .serializers import MenuItemSerializer
+from django.http import JsonResponse
+from utils.validation_utils import is_valid_email
 
 # Create your views here.
 
@@ -98,3 +100,11 @@ class MenuItemsByCategoryView(APIView):
     items = MenuItem.objects.filter(category__name__iexact=category_name)
     serializer = MenuItemSerializer(items, many=True)
     return Response(serializer.data,status=status.HTTP_200_OK)    
+
+
+def subscribe_view(request):
+    if request.mwthod = "POST"
+        email = request.POST.get("email")
+        if not is_valid_email:
+            return JsonResponse({"error": "Invalid email address"}, status = 400)
+        return JsonResponse({"message":"subscription successful!"})
