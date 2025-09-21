@@ -6,6 +6,9 @@ from .views import MenuItemViewSet
 from rest_framework.routers import DefaultRouter
 
 
+router = DefaultRouter()
+router.register(r'menu-items', MenuItemViewSet, basename = 'menuitem')
+
 urlpatterns = [
     path('',home_view, name='home')
     path('', views_home,name = 'home')
@@ -17,5 +20,6 @@ urlpatterns = [
     path('menu-categories/' , MenuCategoryListView.as_view() , name='menu-categories'),
     path('menu-items/',MenuItemsByCategoryView.as_view(),name='menu-items-by-category'),
     path('',include(router.urls)),
+    path('api/',include('home.urls'))
 
 ]
