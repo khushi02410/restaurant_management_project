@@ -9,7 +9,10 @@ class Restaurant(models.Model):
     state  = models.CharField(max_length = 100)
     zip_code = models.CharField(max_length = 20)
     opening_hours = models.JSONField(default = dict)
-
+    operating_days = models.CharField(
+        max_length = 50,
+        help_text = "mon , tuesday , wednesday , thrusday , friday"
+    )
     def __str__(self):
         return f"{self.address}, {self.name}, {self.city}, {self.state} - {self.zip_code}"
         
