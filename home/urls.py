@@ -20,6 +20,7 @@ urlpatterns = [
     path('menu-categories/' , MenuCategoryListView.as_view() , name='menu-categories'),
     path('menu-items/',MenuItemsByCategoryView.as_view(),name='menu-items-by-category'),
     path('',include(router.urls)),
-    path('api/',include('home.urls'))
+    path('api/',include('home.urls')),
+    path('api/users/', include('users.urls')),
 
 ]
