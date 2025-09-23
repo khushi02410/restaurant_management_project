@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import MenuCategory
 from .models import MenuItem
@@ -18,3 +19,10 @@ class MenuItemSerializer(serializers.ModelSerializer):
         if value <= 0:
             raise serializers.validationError("price must be a +tive number") 
         return value       
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class meta:
+        model = User
+        fields = ['first_name','last_name','email']
+        
