@@ -20,9 +20,3 @@ class MenuItemSerializer(serializers.ModelSerializer):
             raise serializers.validationError("price must be a +tive number") 
         return value       
 
-
-class UserProfileSerializer(serializers.ModelSerializer):
-    class meta:
-        model = User
-        fields = ['first_name','last_name','email']
-        
