@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import MenuItem
 from .models import Order
 from .serializers import OrderSerializer
+from .utils  import send_order_confirmation_email
 
 # Create your views here.
 path('/orders',OrdersListView.as_view(),name='orders'),
