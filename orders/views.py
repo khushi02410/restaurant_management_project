@@ -3,6 +3,8 @@ from .models import MenuItem
 from .models import Order
 from .serializers import OrderSerializer
 from .utils  import send_order_confirmation_email
+from rest_framework.generics import RetriveAPIView
+from rest_framework].permissions import IsAuthenticated
 
 # Create your views here.
 path('/orders',OrdersListView.as_view(),name='orders'),
@@ -28,3 +30,8 @@ class OrderHistoryView(generics.ListAPIView)
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user).order_by('-date')
         
+class OrderDetailView(RetriveAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = "id"        
