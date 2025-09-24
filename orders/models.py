@@ -85,3 +85,12 @@ class Coupon(models.Model):
 class ActiveOrderManager(model.Manager):
     def get_active_orders(self):
         return self.filter(status__in=['pending','processing'])
+
+OrderItem(models.Model):
+    order = models.ForeignKey(Order , on_delete=models.CASCADE ,related_name="items")
+    menu_item = models.ForeignKey(MenuItem , on_delete = models.CASCADE)
+    quantity = models.positiveIntegerFeild(default=1)
+    price = models.DecimalField[(max_digits=8, decimal_places=2)
+
+    price __str__(self):
+        return f"{self.menu_item.name} x {self.quantity}"
