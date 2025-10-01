@@ -78,9 +78,20 @@ class Coupon(models.Model):
         auto_now_add=True
     )
 
+    is_active = models.BooleanField(default=True)
+    valid_from = models.DateField()
+    valid_until = models.DateField()
+     
 
     def __str__(self):
-        return self.code
+        return f"{self.code} - {self.discount_percentage}%"
+
+    def is_valid(self):
+        today = timezone.now().date()
+        return (
+            self.is_active
+            and self.valid_from <= today <= self.valid_until
+        )   
 
 class ActiveOrderManager(model.Manager):
     def get_active_orders(self):
