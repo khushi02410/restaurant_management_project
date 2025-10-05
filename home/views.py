@@ -16,6 +16,10 @@ from .serializers import MenuCategorySerializer, MenuItemSerializer, TableSerial
 from utils.validation_utils import is_valid_email
 from .forms import ContactForm  # Assuming you have this form
 
+from rest_framework import generics
+from .models import Table
+from .serializers import TableSerializer
+
 
 # ---------- BASIC DJANGO VIEWS ---------- #
 
@@ -130,3 +134,10 @@ class TableListView(generics.ListAPIView):
 class TableDetailView(generics.RetrieveAPIView):
     queryset = Table.objects.all()
     serializer_class = TableSerializer
+
+class AvailableTablesAPIView(generics.ListAPIView):
+    serializer_class = TableSerializer
+
+    def get_queryset(self):
+        # Return only available tables
+        return Table.objects.filter(is_available=True)    

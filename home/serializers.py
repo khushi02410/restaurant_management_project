@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import MenuCategory
 from .models import MenuItem
+from .models import Table
 
 class MenuCategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,3 +21,7 @@ class MenuItemSerializer(serializers.ModelSerializer):
             raise serializers.validationError("price must be a +tive number") 
         return value       
 
+class TableSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Table
+        fields = ['table_number', 'capacity', 'is_available']
