@@ -4,6 +4,7 @@ from .views import contact_view
 from . import views
 from .views import MenuItemViewSet
 from rest_framework.routers import DefaultRouter
+from .views import TableListView , TableDetailView
 
 
 router = DefaultRouter()
@@ -22,5 +23,7 @@ urlpatterns = [
     path('',include(router.urls)),
     path('api/',include('home.urls')),
     path('api/users/', include('users.urls')),
+    path('api/tables/',TableListView.as_view(), name='table-list'),
+    path('api/tables/<int:pk>/', TableDetailView.as_view() , name='table-detail'),
 
 ]
