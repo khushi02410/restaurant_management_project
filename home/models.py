@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User
 
 class userProfile(models.Model):
     user = models.oneToField, on_delete = models.CASADE , related_name= "profile)
