@@ -21,7 +21,7 @@ class OrderStatus(models.Model):
 
 
 class Order(models.Model):
- 
+    order_id = models.CharField(max_length=12, unique=True, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -55,6 +55,8 @@ class Order(models.Model):
         return f"Order #{self.id} by {self.customer.name}"
         return f"Order by {self.customer_name} at {self.restaurant.city} on {self.order_date}"
         return f"Order {self.id} - {self.status}"
+        return f"Order #{self.order_id}"
+
 
 
 class MenuItem(models.Model):

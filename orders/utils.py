@@ -1,6 +1,4 @@
-import string
-import secrets
-import logging
+import string , secrets , logging
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import Coupon, Order
@@ -44,3 +42,11 @@ def daily_sales_total(date):
     except Exception as e:
         print(f"Error calculating daily sales: {e}")
         return 0       
+    
+def generate_unique_order_id(length=9):
+    characters = string.ascii_uppercase + string.digits
+
+    while True:
+        unique_id = ''.join(secrets.choice(characters) for _ in range(length))
+        if not Order.objects.filter(order_id=unique_id).exists():
+            return unique_id   
