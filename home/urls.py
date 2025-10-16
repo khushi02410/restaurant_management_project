@@ -6,6 +6,7 @@ from .views import MenuItemViewSet
 from rest_framework.routers import DefaultRouter
 from .views import TableListView , TableDetailView
 from .views import AvailableTablesAPIView
+from .views import ContactFormSubmissionView
 
 router = DefaultRouter()
 router.register(r'menu-items', MenuItemViewSet, basename = 'menuitem')
@@ -26,5 +27,5 @@ urlpatterns= [
     path('api/tables/',TableListView.as_view(), name='table-list'),
     path('api/tables/<int:pk>/', TableDetailView.as_view() , name='table-detail'),
     path('api/tables/available/', AvailableTablesAPIView.as_view(), name='available_tables_api'),
-
+    path('api/contact/', ContactFormSubmissionView.as_view(), name='contact-form'),
 ]

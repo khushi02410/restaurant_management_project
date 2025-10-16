@@ -20,6 +20,9 @@ from rest_framework import generics
 from .models import Table
 from .serializers import TableSerializer
 
+from .models import ContactFormSubmission
+from .serializers import ContactFormSubmissionSerializer
+
 
 # ---------- BASIC DJANGO VIEWS ---------- #
 
@@ -141,3 +144,18 @@ class AvailableTablesAPIView(generics.ListAPIView):
     def get_queryset(self):
         # Return only available tables
         return Table.objects.filter(is_available=True)    
+    
+
+class ContactFormSubmissionView(generics.CreateAPIView):
+    queryset = ContactFormSubmission.objects.all()
+    serializer_class = ContactFormSubmissionSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"message": "Your message has been submitted successfully."},
+                status=status.HTTP_201_CREATED
+            )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
