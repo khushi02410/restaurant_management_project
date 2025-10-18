@@ -2,6 +2,10 @@ import string , secrets , logging
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import Coupon, Order
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.db.models import Sum
 
 def generate_coupon_code(length=10):
@@ -22,7 +26,7 @@ def send_order_confirmation_email(order_id, customer_email, customer_name=None):
             f"Your order ID is #{order_id}.\n\n"
             f"Best regards,\nThe Shop Team"
         )
-        from_email = settings.DEFAULT_FROM_EMAIL  # Make sure it's set in settings.py
+        from_email = settings.DEFAULT_FROM_EMAIL 
         recipient_list = [customer_email]
 
         send_mail(subject, message, from_email, recipient_list, fail_silently=False)
@@ -50,3 +54,30 @@ def generate_unique_order_id(length=9):
         unique_id = ''.join(secrets.choice(characters) for _ in range(length))
         if not Order.objects.filter(order_id=unique_id).exists():
             return unique_id   
+        
+def send_email_notification(recipient_email , subject , message):
+    try:
+        validate_email(recipient_email)
+
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[recipient_email],
+            fail_silently=False,
+        )
+
+        logger.info(f"Email successfully sent to {recipient_email}")
+        return True
+    
+    except ValidationError:
+        logger.error(f"Invalid email address: {recipient_email}")
+        return False
+
+    except BadHeaderError:
+        logger.error(f"Invalid header found")
+        return False
+    
+    except Exception as e:
+        logger.error(f"Unexpected error")
+        return False

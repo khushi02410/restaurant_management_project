@@ -22,6 +22,7 @@ from .serializers import TableSerializer
 
 from .models import ContactFormSubmission
 from .serializers import ContactFormSubmissionSerializer
+from .utils import send_email_notification
 
 
 # ---------- BASIC DJANGO VIEWS ---------- #
@@ -153,7 +154,14 @@ class ContactFormSubmissionView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            contact = serializer.save()
+
+            send_email_notification(
+                recipient_email=contact.email,
+                subject="thanks for contacting us "
+                message=f"hi{contact.name,\n\nWe recieved you message:\n{contact.message\n\nwe'll get back to you soon!}}"
+            )
+
             return Response(
                 {"message": "Your message has been submitted successfully."},
                 status=status.HTTP_201_CREATED
