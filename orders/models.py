@@ -21,6 +21,7 @@ class OrderStatus(models.Model):
 
 
 class Order(models.Model):
+
     order_id = models.CharField(max_length=12, unique=True, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -29,12 +30,21 @@ class Order(models.Model):
     customer_name = models.CharField(max_length=100)
     order_items = models.ManyToManyField(Menu)
     order_date = models.DateTimeField(auto_now_add = True)
-    #total_amount = models.DecimalField(max_digits = 10 , decimal_places = 2)
+    total_amount = models.DecimalField(max_digits = 10 , decimal_places = 2)
     #created_at = ActiveOrderManager()
     objects = models.Manager()
 
     status = models.CharField(max_length = 20 , choices = [("pending","Pending"),("completed","Completed"),("cancelled","Cancelled")],default="pending"
     )
+
+    STATUS_CHOICES = [
+        ('PENDING', 'Pending'),
+        ('PROCESSING', 'Processing'),
+        ('CANCELLED', 'Cancelled'),
+        ('COMPLETED', 'Completed'),
+    ]
+
+
     # created_at = models.DateTimeField(auto_now_add = True)
 
     restaurant = models.ForeignKey(

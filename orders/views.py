@@ -11,7 +11,7 @@ from rest_framework import status
 from django.utils import timezone
 from .models import coupon
 from .serializers import CouponSerializer
-
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 path('/orders',OrdersListView.as_view(),name='orders'),
@@ -79,3 +79,32 @@ class CouponValidationView(APIView):
             staus =status.HTTP_200_OK
         )
 
+class CancelOrderAPIView(views.APIView):
+    Permission_class = [IsAuthenticated]
+
+    def delete(self, request, order_id):
+        order = get_object_or_404(Order , id=order_id)
+
+        if order.user != request.user:
+            return Response(
+                {"error":"you are not authorized to cancel this order."},
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
+        if order.status == 'CANCELLED':
+            return Response(
+                {"error":"This order is already cancelled."}
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        if order.status == 'COMPLETED':
+            return Response(
+                {"error":"Completed order cannot be cancelled."},status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        order.status = 'CANCELLED'
+        order.save()
+
+        return Response(
+            {"message":f"Order {order.order_id} has been cancelled successfully."},status=status.HTTP_200_OK
+        )
