@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from restaurant.models import MenuItem 
 from restaurant_management import RestauranntLocation
+from decimal import Decimal
+from django.conf import settings
+from home.models import MenuItem
 # Create your models here.
 
 class Menu(models.model):
@@ -43,9 +46,13 @@ class Order(models.Model):
         ('CANCELLED', 'Cancelled'),
         ('COMPLETED', 'Completed'),
     ]
-
-
     # created_at = models.DateTimeField(auto_now_add = True)
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='orders'
+    )
 
     restaurant = models.ForeignKey(
         RestauranntLocation,
@@ -65,8 +72,7 @@ class Order(models.Model):
         return f"Order #{self.id} by {self.customer.name}"
         return f"Order by {self.customer_name} at {self.restaurant.city} on {self.order_date}"
         return f"Order {self.id} - {self.status}"
-        return f"Order #{self.order_id}"
-
+        return f"Order #{self.order_id} - {self.status}"
 
 
 class MenuItem(models.Model):
@@ -78,6 +84,11 @@ class MenuItem(models.Model):
     def __str__(self):
         return self.name
 
+def calculate_total(self):
+    total = Decimal('0.00')
+    for item in self.items.all():
+        total += item.price * item.quantity
+    return total
 
 class Coupon(models.Model):
     code = models.CharField(
@@ -113,11 +124,11 @@ class ActiveOrderManager(model.Manager):
     def get_active_orders(self):
         return self.filter(status__in=['pending','processing'])
 
-OrderItem(models.Model):
+class OrderItem(models.Model):
     order = models.ForeignKey(Order , on_delete=models.CASCADE ,related_name="items")
     menu_item = models.ForeignKey(MenuItem , on_delete = models.CASCADE)
     quantity = models.positiveIntegerFeild(default=1)
-    price = models.DecimalField[(max_digits=8, decimal_places=2)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
 
-    price __str__(self):
+    def  __str__(self):
         return f"{self.menu_item.name} x {self.quantity}"
