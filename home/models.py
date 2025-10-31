@@ -47,6 +47,7 @@ class MenuItem(models.Model):
     price = models.DecimalField(max_digit=5, decimal_places=2)
     category = models.ForeignKey(MenuCategory,on_delete=models.CASCADE, related_name = "items")
     available = models.BooleanFeild(default=True)
+    is_featured = models.BooleanField(default=False)
     
     def __str__(self):
         return self.name
@@ -72,5 +73,4 @@ class NutritionalInformation(models.Model):
 
     def __str__ (self):
         return f"{self.menu_item.name} - {self.calories} kcal"
-    
     

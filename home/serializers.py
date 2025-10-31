@@ -15,7 +15,7 @@ class MenuItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=MenuItem
-        feilds = ['id' , 'name' , 'description','price','category','available']
+        feilds = ['id' , 'name' , 'description','price','category','available', 'is_featured']
 
     def validation_price(self,value):
         if value <= 0:
