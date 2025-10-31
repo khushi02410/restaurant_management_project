@@ -23,7 +23,12 @@ from .serializers import TableSerializer
 from .models import ContactFormSubmission
 from .serializers import ContactFormSubmissionSerializer
 from .utils import send_email_notification
+from django.shortscuts import render
+from .models import DailySpecial
 
+def home_view(request):
+    special_of_the_day= DailySpecial.get_random_special()
+    return render(request, 'home/home.html', {'special_of_the_day'})
 
 # ---------- BASIC DJANGO VIEWS ---------- #
 

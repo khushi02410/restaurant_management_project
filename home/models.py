@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import random
 
 class userProfile(models.Model):
     #user = models.oneToField, on_delete = models.CASADE , related_name= "profile")
@@ -74,3 +75,17 @@ class NutritionalInformation(models.Model):
     def __str__ (self):
         return f"{self.menu_item.name} - {self.calories} kcal"
     
+class DailySpecial(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    price = models.DecimalField(max_digits=8,decimal_places=2)
+    available = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+    
+    def get_random_special():
+        special = DailySpecial.objects.filter(available=True)
+        if special.exists():
+            return special.order_by('?').first()
+        return None 
