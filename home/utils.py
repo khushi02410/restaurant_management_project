@@ -1,4 +1,5 @@
 from datetime import datetime, time
+from home.models import DailyOpertingHours
 
 def is_restaurant_open():
     now = datetime.now()
@@ -23,3 +24,12 @@ def is_restaurant_open():
     open_time, close_time = opening_hours[current_day]
 
     return open_time <= current_time <= close_time
+
+def get_today_operating_hours():
+    today = datetime.now().strftime('%A')
+
+    try:
+        hours = DailyOpertingHours.objects.get(day_of_week=today)
+        return(hours.open_time, hours.close_time)
+    except:
+        return (None , None)
