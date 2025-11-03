@@ -89,3 +89,14 @@ class DailySpecial(models.Model):
         if special.exists():
             return special.order_by('?').first()
         return None 
+    
+class Restaurant(models.Model):
+        name = models.CharField(max_length=255)
+        address = models.TextField()
+        phone_address = models.CharField(max_length=21)
+        phone_number = models.CharField(max_length=21)
+
+        has_delivery = models.BooleanField(default=False)
+
+        def __str__(self):
+            return self.name
