@@ -95,7 +95,7 @@ class Restaurant(models.Model):
         address = models.TextField()
         phone_address = models.CharField(max_length=21)
         phone_number = models.CharField(max_length=21)
-
+        
         has_delivery = models.BooleanField(default=False)
 
         def __str__(self):
