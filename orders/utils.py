@@ -7,6 +7,8 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db.models import Sum
+from decimal import Decimal, ROUND_HALF_UP
+
 
 def generate_coupon_code(length=10):
     characters = string.ascii_uppercase + string.digits
@@ -81,3 +83,13 @@ def send_email_notification(recipient_email , subject , message):
     except Exception as e:
         logger.error(f"Unexpected error")
         return False
+    
+
+def calculate_tip_amount(order_total, tip_percentage):
+    
+    total = Decimal(str(order_total))
+    percentage  = Decimal(str(tip_percentage)) / Decimal('100')
+
+    tip_amount = total * percentage
+
+    return tip_amount.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
