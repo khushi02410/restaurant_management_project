@@ -43,15 +43,25 @@ class MenuCategory(models.Model):
         return self.name  
 
 class MenuItem(models.Model):
-    name = models.CharField(max_length = 30)
+    name = models.CharField(max_length = 100)
     description = models.TextField(blank=True,null=True)
     price = models.DecimalField(max_digit=5, decimal_places=2)
     category = models.ForeignKey(MenuCategory,on_delete=models.CASCADE, related_name = "items")
     available = models.BooleanFeild(default=True)
     is_featured = models.BooleanField(default=False)
     
+    objects  = MenuItemManager()
+
     def __str__(self):
         return self.name
+    
+class MenuItemManager(models.Manager):
+    def get_top_selling_items(self , num_items=5):
+        return (
+            self.get_queryset()
+            .annotate(order_count=Count('orderitem'))
+            .order_by('_order_count'[:num_items])
+        )  
 
 class ContactFormSubmission(models.Model):
     name = models.CharField(max_length=100)
