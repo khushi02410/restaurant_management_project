@@ -43,6 +43,11 @@ class MenuCategory(models.Model):
     def __str__(self):
         return self.name  
 
+class Ingredient(models.Model):
+    name = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.name
 class MenuItem(models.Model):
     name = models.CharField(max_length = 100)
     description = models.TextField(blank=True,null=True)
@@ -50,7 +55,8 @@ class MenuItem(models.Model):
     category = models.ForeignKey(MenuCategory,on_delete=models.CASCADE, related_name = "items")
     available = models.BooleanFeild(default=True)
     is_featured = models.BooleanField(default=False)
-    
+    ingredients = models.ManyToManyField(ingredients, related_name = 'menu_items'
+                                         )
     objects  = MenuItemManager()
 
     def __str__(self):

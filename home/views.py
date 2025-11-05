@@ -12,13 +12,12 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import ListAPIView
 
 from .models import MenuItem, Contact, MenuCategory, Table
-from .serializers import MenuCategorySerializer, MenuItemSerializer, TableSerializer
+from .serializers import MenuCategorySerializer, MenuItemSerializer, TableSerializer , IngredienSerializer
 from utils.validation_utils import is_valid_email
 from .forms import ContactForm  # Assuming you have this form
 
 from rest_framework import generics
 from .models import Table
-from .serializers import TableSerializer
 
 from .models import ContactFormSubmission
 from .serializers import ContactFormSubmissionSerializer
@@ -180,3 +179,18 @@ class FeaturedMenuItemView(generics.ListAPIView):
     def get_queryset(self):
         return MenuItem.objects.filter(is_featured=True)
     
+
+class MenuItemIngredientsView(generics.RetriveAPIView):
+    queryset = MenuItem.objects.all()
+
+    def get(self , request ,  *args, **kwargs):
+        menu_item_id = kwargs.get('pk')
+        try:
+            menu_item = MenuItem.objects.get(pk=menu_item_id)
+        except MenuItem.DoesNotExist:
+            return Response({'error':'Menu item not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        Ingredients = menu_item.ingredients.all()
+        serializer =  IngredientSerializer(ingredients, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        

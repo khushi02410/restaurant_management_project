@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import MenuCategory
-from .models import MenuItem
+from .models import MenuItem,Ingredient
 from .models import Table
 from .models import ContactFormSubmission
+
 
 class MenuCategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -41,3 +42,8 @@ class ContactFormSubmissionSerializer(serializers.ModelSerializer):
         if len(value.strip()) < 5:
             raise serializers.ValidationError("Message must be at least 5 characters long.")
         return value        
+    
+class IngredienSerializer(serializers.ModelSerializer):    
+    class meta:
+        model = Ingredient
+        fields = ['id','name']
