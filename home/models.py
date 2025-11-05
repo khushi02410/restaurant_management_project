@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import random
+import datetime
 
 class userProfile(models.Model):
     #user = models.oneToField, on_delete = models.CASADE , related_name= "profile")
@@ -85,14 +86,23 @@ class NutritionalInformation(models.Model):
     def __str__ (self):
         return f"{self.menu_item.name} - {self.calories} kcal"
     
+
+class DailySpecialManager(models.Manager):
+    def upcoming (self):
+        today = datetime.date.today()
+        return self.get_query().filter(date__gate=today)
+
 class DailySpecial(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=8,decimal_places=2)
     available = models.BooleanField(default=True)
+    date = models.DateField()
+
+    objects = DailySpecialManager()
 
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.date})"
     
     def get_random_special():
         special = DailySpecial.objects.filter(available=True)
