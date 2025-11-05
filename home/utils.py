@@ -33,3 +33,7 @@ def get_today_operating_hours():
         return(hours.open_time, hours.close_time)
     except:
         return (None , None)
+
+def is_valid_phone_number(phone_number: str) -> bool:
+    pattern = re.compile(r"^\+?\d{1,3}?[-\s]?\d{3,5}[-\s]?\d{4,7}$")
+    return bool(pattern.match(phone_number))                     
